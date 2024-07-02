@@ -43,7 +43,7 @@ const validarEntrada = (tipoVehiculo) => {
         tipoVehiculo !== '3' &&
         tipoVehiculo !== '4'
     ) {
-        console.log('La opción ingresada no existe. Reintente');
+        alert('La opción ingresada no existe. Reintente');
         tipoVehiculo = prompt(
             'Ingrese tipo de vehiculo \n1. Auto \n2. Moto \n3. Camioneta \n4. Salir'
         );
