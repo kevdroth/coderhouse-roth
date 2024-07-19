@@ -1,147 +1,199 @@
-let menuGeneral = prompt(
-    'Seleccione una opción: \n1. Ingresar reserva \n2. Listar reservas \n3. Buscar reserva \n4. Salir'
-);
-// let menuBusquedaReserva = prompt(
-//     'Seleccione una opción: \n1. Busqueda por tipo de vehiculo \n2. Busqueda por fecha'
-// );
+let menuGeneral;
 
-let reservas = [];
+const mostrarMenuGeneral = () => {
+    menuGeneral = prompt(
+        'Seleccione una opción: \n1. Ingresar reserva \n2. Listar reservas \n3. Buscar reserva \n4. Salir'
+    );
+};
+
+const mostrarMenuBusquedaReserva = () => {
+    return prompt(
+        'Seleccione una opción: \n1. Busqueda por tipo de vehiculo \n2. Busqueda por fecha'
+    );
+};
+
+const mostrarPrompt = (mensaje) => {
+    return prompt(mensaje);
+};
+
+const mostrarAlert = (mensaje) => {
+    alert(mensaje);
+};
+
+const reservas = [];
 
 const tiposDeVehiculos = [
-    {
-        id: 1,
-        nombre: 'Auto',
-    },
-    {
-        id: 2,
-        nombre: 'Moto',
-    },
-    {
-        id: 3,
-        nombre: 'Camioneta',
-    },
+    { id: 1, nombre: 'Auto' },
+    { id: 2, nombre: 'Moto' },
+    { id: 3, nombre: 'Camioneta' },
 ];
 
-let total = 0;
-let tarifa = 0;
-const servicio = 50;
-
 const calcularPrecio = (vehiculo) => {
+    let tarifa;
     switch (vehiculo) {
-        case 'auto':
+        case 'Auto':
             tarifa = 100;
-            total = servicio + 100;
             break;
-        case 'moto':
+        case 'Moto':
             tarifa = 50;
-            total = servicio + 50;
             break;
-        case 'camioneta':
+        case 'Camioneta':
             tarifa = 250;
-            total = servicio + 250;
             break;
         default:
+            tarifa = 0;
             break;
     }
     return tarifa;
 };
 
-const consultarVehiculo = (tipoVehiculo) => {
-    if (tipoVehiculo === '1') {
-        return 'un auto';
-    } else if (tipoVehiculo === '2') {
-        return 'una moto';
-    } else if (tipoVehiculo === '3') {
-        return 'una camioneta';
-    }
-};
+const iniciarMenu = () => {
+    while (true) {
+        mostrarMenuGeneral();
+        if (!menuGeneral) continue;
 
-const iniciarMenu = (menuGeneral) => {
-    while (
-        menuGeneral !== '1' &&
-        menuGeneral !== '2' &&
-        menuGeneral !== '3' &&
-        menuGeneral !== '4'
-    ) {
-        alert('La opción ingresada no existe. Reintente');
-        menuGeneral = prompt(
-            'Seleccione una opción: \n1. Ingresar reserva \n2. Listar reservas \n3. Buscar reserva \n4. Salir'
-        );
-    }
+        while (
+            menuGeneral !== '1' &&
+            menuGeneral !== '2' &&
+            menuGeneral !== '3' &&
+            menuGeneral !== '4'
+        ) {
+            mostrarAlert('La opción ingresada no existe. Reintente');
+            mostrarMenuGeneral();
+            if (!menuGeneral) continue;
+        }
 
-    if (menuGeneral === '4') {
-        alert('Hasta luego.');
-        console.log(reservas);
-        return;
-    }
+        if (menuGeneral === '4') {
+            mostrarAlert('Hasta luego.');
+            return;
+        }
 
-    switch (menuGeneral) {
-        case '1':
-            const fecha = prompt('Ingrese fecha en formato MM/DD/YYYY:');
-            let tipoVehiculo = prompt(
-                'Ingrese tipo de vehiculo \n1. Auto \n2. Moto \n3. Camioneta'
-            );
+        switch (menuGeneral) {
+            case '1':
+                const fecha = mostrarPrompt(
+                    'Ingrese fecha en formato DD/MM/YYYY:'
+                );
+                if (!fecha) continue;
 
-            if (tipoVehiculo === '1') {
-                tipoVehiculo = 'Auto';
-            } else if (tipoVehiculo === '2') {
-                tipoVehiculo = 'Moto';
-            } else if (tipoVehiculo === '3') {
-                tipoVehiculo = 'Camioneta';
-            } else {
-                tipoVehiculo = prompt(
+                let tipoVehiculo = mostrarPrompt(
                     'Ingrese tipo de vehiculo \n1. Auto \n2. Moto \n3. Camioneta'
                 );
-                return;
-            }
+                if (!tipoVehiculo) continue;
 
-            const reserva = {
-                fecha: fecha,
-                tipo: tipoVehiculo,
-            };
-            reservas.push(reserva);
-
-            menuGeneral = prompt(
-                'Seleccione una opción: \n1. Ingresar reserva \n2. Listar reservas \n3. Buscar reserva \n4. Salir'
-            );
-            iniciarMenu(menuGeneral);
-            break;
-        case '2':
-            let dataReservas = '';
-            reservas.forEach((reserva) => {
-                dataReservas += `Fecha: ${reserva.fecha} - Tipo: ${reserva.tipo}\n`;
-            });
-            alert(dataReservas);
-            menuGeneral = prompt(
-                'Seleccione una opción: \n1. Ingresar reserva \n2. Listar reservas \n3. Buscar reserva \n4. Salir'
-            );
-            iniciarMenu(menuGeneral);
-            break;
-        case '3':
-            let menuBusquedaReserva = prompt(
-                'Seleccione una opción: \n1. Busqueda por tipo de vehiculo \n2. Busqueda por fecha'
-            );
-            if (menuBusquedaReserva === '1') {
-                let tipoVehiculo = prompt(
-                    'Ingrese tipo de vehiculo \n1. Auto \n2. Moto \n3. Camioneta'
-                );
-                let dataReservas = '';
-                if (tipoVehiculo === '1') {
-                    reservas.filter((f) => f.id === tipoVehiculo);
-                    reservas.forEach((reserva) => {
-                        dataReservas += `Fecha: ${reserva.fecha} - Tipo: ${reserva.tipo}\n`;
-                    });
-                    console.log(dataReservas);
-                    alert(reservas);
-                    menuGeneral = prompt(
-                        'Seleccione una opción: \n1. Ingresar reserva \n2. Listar reservas \n3. Buscar reserva \n4. Salir'
-                    );
-                    iniciarMenu(menuGeneral);
-                } else if (tipoVehiculo === '2') {
-                } else if (tipoVehiculo === '3') {
+                switch (tipoVehiculo) {
+                    case '1':
+                        tipoVehiculo = 'Auto';
+                        break;
+                    case '2':
+                        tipoVehiculo = 'Moto';
+                        break;
+                    case '3':
+                        tipoVehiculo = 'Camioneta';
+                        break;
+                    default:
+                        mostrarAlert('Tipo de vehículo no válido. Reintente.');
+                        continue;
                 }
-            }
-            break;
+
+                const reserva = {
+                    fecha: fecha,
+                    tipo: tipoVehiculo,
+                    precio: calcularPrecio(tipoVehiculo),
+                };
+                reservas.push(reserva);
+                break;
+
+            case '2':
+                if (reservas.length === 0) {
+                    mostrarAlert('No hay reservas registradas.');
+                } else {
+                    let dataReservas = '';
+                    reservas.forEach((reserva) => {
+                        dataReservas += `Fecha: ${reserva.fecha} - Tipo: ${reserva.tipo} - Precio: $${reserva.precio}\n`;
+                    });
+                    mostrarAlert(dataReservas);
+                }
+                break;
+
+            case '3':
+                let menuBusquedaReserva = mostrarMenuBusquedaReserva();
+                if (!menuBusquedaReserva) continue;
+
+                switch (menuBusquedaReserva) {
+                    case '1':
+                        let tipoVehiculoBusqueda = mostrarPrompt(
+                            'Ingrese tipo de vehiculo \n1. Auto \n2. Moto \n3. Camioneta'
+                        );
+                        if (!tipoVehiculoBusqueda) continue;
+
+                        switch (tipoVehiculoBusqueda) {
+                            case '1':
+                                tipoVehiculoBusqueda = 'Auto';
+                                break;
+                            case '2':
+                                tipoVehiculoBusqueda = 'Moto';
+                                break;
+                            case '3':
+                                tipoVehiculoBusqueda = 'Camioneta';
+                                break;
+                            default:
+                                mostrarAlert(
+                                    'Tipo de vehículo no válido. Reintente.'
+                                );
+                                continue;
+                        }
+
+                        let resultadosTipo = reservas.filter(
+                            (reserva) => reserva.tipo === tipoVehiculoBusqueda
+                        );
+                        if (resultadosTipo.length > 0) {
+                            let dataResultados = '';
+                            resultadosTipo.forEach((reserva) => {
+                                dataResultados += `Fecha: ${reserva.fecha} - Tipo: ${reserva.tipo} - Precio: $${reserva.precio}\n`;
+                            });
+                            mostrarAlert(dataResultados);
+                        } else {
+                            mostrarAlert(
+                                'No se encontraron reservas para el tipo de vehículo seleccionado.'
+                            );
+                        }
+                        break;
+
+                    case '2':
+                        let fechaBusqueda = mostrarPrompt(
+                            'Ingrese fecha en formato DD/MM/YYYY:'
+                        );
+                        if (!fechaBusqueda) continue;
+
+                        let resultadosFecha = reservas.filter(
+                            (reserva) => reserva.fecha === fechaBusqueda
+                        );
+                        if (resultadosFecha.length > 0) {
+                            let dataResultados = '';
+                            resultadosFecha.forEach((reserva) => {
+                                dataResultados += `Fecha: ${reserva.fecha} - Tipo: ${reserva.tipo} - Precio: $${reserva.precio}\n`;
+                            });
+                            mostrarAlert(dataResultados);
+                        } else {
+                            mostrarAlert(
+                                'No se encontraron reservas para la fecha seleccionada.'
+                            );
+                        }
+                        break;
+
+                    default:
+                        mostrarAlert(
+                            'Opción de búsqueda no válida. Reintente.'
+                        );
+                        continue;
+                }
+                break;
+
+            default:
+                mostrarAlert('Opción no válida. Reintente.');
+                continue;
+        }
     }
 };
-iniciarMenu(menuGeneral);
+
+iniciarMenu();
