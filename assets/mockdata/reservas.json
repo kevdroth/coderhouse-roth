@@ -4,7 +4,8 @@
         "nombre": "Juan",
         "apellido": "Perez",
         "vehiculo": "Auto",
-        "fecha": "17/01/2024",
+        "fechaInicio": "2024-01-17",
+        "fechaFin": "2024-01-19",
         "monto": "19362.23"
     },
     {
@@ -12,7 +13,8 @@
         "nombre": "Ana",
         "apellido": "Gomez",
         "vehiculo": "Moto",
-        "fecha": "25/02/2024",
+        "fechaInicio": "2024-02-25",
+        "fechaFin": "2024-02-28",
         "monto": "24821.52"
     },
     {
@@ -20,7 +22,8 @@
         "nombre": "Luis",
         "apellido": "Martinez",
         "vehiculo": "Camioneta",
-        "fecha": "12/03/2024",
+        "fechaInicio": "2024-03-12",
+        "fechaFin": "2024-03-16",
         "monto": "9373.28"
     },
     {
@@ -28,7 +31,8 @@
         "nombre": "Maria",
         "apellido": "Rodriguez",
         "vehiculo": "Camioneta",
-        "fecha": "03/04/2024",
+        "fechaInicio": "2024-04-03",
+        "fechaFin": "2024-04-06",
         "monto": "1312.75"
     },
     {
@@ -36,7 +40,89 @@
         "nombre": "Carlos",
         "apellido": "Lopez",
         "vehiculo": "Auto",
-        "fecha": "09/05/2024",
+        "fechaInicio": "2024-05-09",
+        "fechaFin": "2024-05-12",
         "monto": "17462.93"
+    },
+    {
+        "id": 6,
+        "nombre": "Sofia",
+        "apellido": "Morales",
+        "vehiculo": "Moto",
+        "fechaInicio": "2024-06-15",
+        "fechaFin": "2024-06-18",
+        "monto": "8652.14"
+    },
+    {
+        "id": 7,
+        "nombre": "Roberto",
+        "apellido": "Fernandez",
+        "vehiculo": "Camioneta",
+        "fechaInicio": "2024-07-20",
+        "fechaFin": "2024-07-23",
+        "monto": "11234.67"
+    },
+    {
+        "id": 8,
+        "nombre": "Laura",
+        "apellido": "Castro",
+        "vehiculo": "Auto",
+        "fechaInicio": "2024-08-01",
+        "fechaFin": "2024-08-04",
+        "monto": "15489.45"
+    },
+    {
+        "id": 9,
+        "nombre": "Pedro",
+        "apellido": "Jimenez",
+        "vehiculo": "Moto",
+        "fechaInicio": "2024-09-10",
+        "fechaFin": "2024-09-13",
+        "monto": "6720.80"
+    },
+    {
+        "id": 10,
+        "nombre": "Carmen",
+        "apellido": "Salazar",
+        "vehiculo": "Camioneta",
+        "fechaInicio": "2024-10-05",
+        "fechaFin": "2024-10-08",
+        "monto": "23789.92"
+    },
+    {
+        "id": 11,
+        "nombre": "Andres",
+        "apellido": "Guerra",
+        "vehiculo": "Auto",
+        "fechaInicio": "2024-11-12",
+        "fechaFin": "2024-11-15",
+        "monto": "10567.33"
+    },
+    {
+        "id": 12,
+        "nombre": "Valeria",
+        "apellido": "Cano",
+        "vehiculo": "Moto",
+        "fechaInicio": "2024-12-01",
+        "fechaFin": "2024-12-04",
+        "monto": "4890.21"
+    },
+    {
+        "id": 13,
+        "nombre": "Felipe",
+        "apellido": "Paredes",
+        "vehiculo": "Camioneta",
+        "fechaInicio": "2024-12-20",
+        "fechaFin": "2024-12-23",
+        "monto": "19560.12"
+    },
+    {
+        "id": 14,
+        "nombre": "Natalia",
+        "apellido": "Alvarez",
+        "vehiculo": "Auto",
+        "fechaInicio": "2024-12-30",
+        "fechaFin": "2024-12-31",
+        "monto": "12456.78"
     }
 ]
