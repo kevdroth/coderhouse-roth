@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Juan",
+        "apellido": "Perez",
+        "vehiculo": "Auto",
+        "fecha": "17/01/2024",
+        "monto": "19362.23"
+    },
+    {
+        "id": 2,
+        "nombre": "Ana",
+        "apellido": "Gomez",
+        "vehiculo": "Moto",
+        "fecha": "25/02/2024",
+        "monto": "24821.52"
+    },
+    {
+        "id": 3,
+        "nombre": "Luis",
+        "apellido": "Martinez",
+        "vehiculo": "Camioneta",
+        "fecha": "12/03/2024",
+        "monto": "9373.28"
+    },
+    {
+        "id": 4,
+        "nombre": "Maria",
+        "apellido": "Rodriguez",
+        "vehiculo": "Camioneta",
+        "fecha": "03/04/2024",
+        "monto": "1312.75"
+    },
+    {
+        "id": 5,
+        "nombre": "Carlos",
+        "apellido": "Lopez",
+        "vehiculo": "Auto",
+        "fecha": "09/05/2024",
+        "monto": "17462.93"
+    }
+]
