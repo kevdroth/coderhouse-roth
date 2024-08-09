@@ -34,3 +34,21 @@ const formatDate = (dateString) => {
 
     return `${day}/${month}/${year}`;
 };
+
+const loading = (off) => {
+    Swal.fire({
+        imageUrl: 'assets/img/status/loader.svg',
+        imageWidth: '130',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        showConfirmButton: false,
+        background: 'transparent',
+        customClass: {
+            title: 'article-title-loader pulse',
+            popup: 'article-container-loader',
+        },
+    });
+
+    !off && swal.close();
+};

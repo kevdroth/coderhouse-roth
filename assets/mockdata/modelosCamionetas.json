@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Ford F-150",
+        "imagen": "assets/img/camionetas/1.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Chevrolet Silverado",
+        "imagen": "assets/img/camionetas/2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "RAM 1500",
+        "imagen": "assets/img/camionetas/3.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Toyota Tacoma",
+        "imagen": "assets/img/camionetas/4.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Nissan Frontier",
+        "imagen": "assets/img/camionetas/5.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "GMC Sierra",
+        "imagen": "assets/img/camionetas/6.jpg"
+    },
+    {
+        "id": 7,
+        "nombre": "Honda Ridgeline",
+        "imagen": "assets/img/camionetas/7.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "Jeep Gladiator",
+        "imagen": "assets/img/camionetas/8.jpg"
+    }
+]

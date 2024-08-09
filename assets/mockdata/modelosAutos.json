@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Toyota Corolla",
+        "imagen": "assets/img/autos/1.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Honda Civic",
+        "imagen": "assets/img/autos/2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Ford Mustang",
+        "imagen": "assets/img/autos/3.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Chevrolet Camaro",
+        "imagen": "assets/img/autos/4.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "BMW 3 Series",
+        "imagen": "assets/img/autos/5.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "Audi A4",
+        "imagen": "assets/img/autos/6.jpg"
+    },
+    {
+        "id": 7,
+        "nombre": "Mercedes-Benz C-Class",
+        "imagen": "assets/img/autos/7.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "Tesla Model 3",
+        "imagen": "assets/img/autos/8.jpg"
+    }
+]

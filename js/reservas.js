@@ -19,7 +19,10 @@ const renderReservas = (reservas) => {
     containerReservas.innerHTML = '';
 
     if (reservas.length > 0) {
-        reservas.sort((a, b) => b.id - a.id);
+        reservas.sort(
+            (a, b) => new Date(b.fechaInicio) - new Date(a.fechaInicio)
+        );
+
         const card = document.createElement('div');
         card.classList.add('grid', 'grid-cols-12', 'gap-5', 'w-full');
 
@@ -27,9 +30,11 @@ const renderReservas = (reservas) => {
             card.innerHTML += `
             <div class="col-span-12 md:col-span-6 lg:col-span-4">
                 <div class="flex flex-col items-center bg-gray-900 rounded-t-lg shadow md:flex-row md:max-w-xl hover:bg-gray-800 hover:shadow-2xl">
-                    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                        src="assets/img/${reserva.vehiculo.toLowerCase()}.jpg"
-                        alt="imagen ${reserva.vehiculo.toLowerCase()}">
+                    <div class="w-full h-40 flex">
+                        <img class="object-cover w-full rounded-t-lg h-full md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+                            src="${reserva.modelo.imagen}"
+                            alt="imagen ${reserva.modelo.nombre}">
+                    </div>
                     <div class="flex flex-col justify-between p-4 leading-normal w-full capitalize">
                         <h5 class="text-2xl font-bold tracking-tight text-white">${
                             reserva.nombre
@@ -39,6 +44,9 @@ const renderReservas = (reservas) => {
                         }</h6>
                         <p class="font-normal text-gray-200 font-bold">${
                             reserva.vehiculo
+                        }</p>
+                        <p class="font-normal text-sm text-gray-200 font-bold">${
+                            reserva.modelo.nombre
                         }</p>
                         <p class="font-normal text-gray-200">${numericMask(
                             reserva.monto
@@ -67,7 +75,7 @@ const renderReservas = (reservas) => {
         noData.classList.add('m-5', 'text-center', 'text-gray-500', 'mb-32');
 
         const img = document.createElement('img');
-        img.src = 'assets/img/noData.png';
+        img.src = 'assets/img/status/noData.png';
         img.alt = 'No hay datos para mostrar';
         img.classList.add('mx-auto', 'h-64', 'w-64', 'object-contain');
 
@@ -79,15 +87,29 @@ const renderReservas = (reservas) => {
         noData.appendChild(message);
         containerReservas.appendChild(noData);
     }
+    loading();
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    loading(true);
+
     const inputSearch = document.querySelector('#inputSearch');
     const btnSearch = document.querySelector('#btnSearch');
     const btnClear = document.querySelector('#btnClear');
     const addReserva = document.querySelector('#addReserva');
 
-    renderReservas(reservas);
+    if (reservas.length > 0) {
+        renderReservas(reservas);
+    } else {
+        reservas = await getReservas();
+
+        if (reservas && reservas.length > 0) {
+            localStorage.setItem('reservas', JSON.stringify(reservas));
+            renderReservas(reservas);
+        } else {
+            renderReservas(reservas);
+        }
+    }
 
     btnSearch.addEventListener('click', () => {
         if (inputSearch.value) {
@@ -97,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     reserva.nombre.toLowerCase().includes(searchQuery) ||
                     reserva.apellido.toLowerCase().includes(searchQuery) ||
                     reserva.vehiculo.toLowerCase().includes(searchQuery) ||
+                    reserva.modelo.nombre.toLowerCase().includes(searchQuery) ||
                     reserva.fechaInicio.includes(searchQuery) ||
                     reserva.fechaFin.includes(searchQuery) ||
                     reserva.monto.includes(searchQuery)
@@ -122,11 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input id="inpApellido" class="p-3 border rounded-lg transition duration-150 ease-in-out" placeholder="Apellido">
                     <input id="inpFechaInicio" class="p-3 border rounded-lg transition duration-150 ease-in-out" placeholder="Fecha de Inicio" type="date">
                     <input id="inpFechaFin" class="p-3 border rounded-lg transition duration-150 ease-in-out" placeholder="Fecha de Fin" type="date">
-                    <select id="selVehiculo" class="p-3 border rounded-lg transition duration-150 ease-in-out">
+                    <select id="selVehiculo" class="capitalize p-3 border rounded-lg transition duration-150 ease-in-out">
                         <option value="" disabled selected>Seleccione un vehículo</option>
-                        <option value="moto">Moto</option>
-                        <option value="auto">Auto</option>
-                        <option value="camioneta">Camioneta</option>
+                    </select>
+                    <select disabled id="selModelo" class="hidden capitalize p-3 border rounded-lg transition duration-150 ease-in-out">
+                        <option value="" disabled selected>Seleccione un modelo</option>
                     </select>
                     <div class="relative">
                         <input id="inpMonto" class="p-3 w-full border rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed transition duration-150 ease-in-out" placeholder="$ 0,00" type="text" disabled>
@@ -140,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nombre = document.getElementById('inpNombre').value;
                 const apellido = document.getElementById('inpApellido').value;
                 const vehiculo = document.getElementById('selVehiculo').value;
+                const modelo = document.getElementById('selModelo').value;
                 const monto = document.getElementById('inpMonto').dataset.monto;
                 const fechaInicio =
                     document.getElementById('inpFechaInicio').value;
@@ -151,7 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     !vehiculo ||
                     !monto ||
                     !fechaInicio ||
-                    !fechaFin
+                    !fechaFin ||
+                    !modelo
                 ) {
                     Swal.showValidationMessage('Complete todos los campos');
                     return false;
@@ -164,14 +189,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     monto,
                     fechaInicio,
                     fechaFin,
+                    modelo,
                 };
             },
-            didOpen: () => {
+            didOpen: async () => {
                 const vehiculoSelect = document.getElementById('selVehiculo');
+                const modeloSelect = document.getElementById('selModelo');
                 const montoInput = document.getElementById('inpMonto');
                 const fechaInicioInput =
                     document.getElementById('inpFechaInicio');
                 const fechaFinInput = document.getElementById('inpFechaFin');
+
+                const vehiculos = await getTipos();
+
+                vehiculos.forEach((vehiculo) => {
+                    const option = document.createElement('option');
+                    option.value = vehiculo.type;
+                    option.text = vehiculo.type;
+                    vehiculoSelect.appendChild(option);
+                });
 
                 const calcularPrecio = (vehiculo) => {
                     let tarifa;
@@ -211,7 +247,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     montoInput.dataset.monto = monto;
                 };
 
-                vehiculoSelect.addEventListener('change', () => {
+                vehiculoSelect.addEventListener('change', async () => {
+                    const id = vehiculoSelect.value;
+
+                    if (id) {
+                        modeloSelect.disabled = false;
+                        modeloSelect.classList.remove('hidden');
+                        modeloSelect.innerHTML =
+                            '<option value="" disabled selected>Seleccione un modelo</option>';
+
+                        const modelos = await getModelos(id);
+
+                        modelos.forEach((modelo) => {
+                            const option = document.createElement('option');
+                            option.value = JSON.stringify(modelo);
+                            option.text = modelo.nombre;
+                            modeloSelect.appendChild(option);
+                        });
+                    }
                     calcularMonto();
                 });
 
@@ -241,7 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 result.value;
-                if (reservas.length > 0) {
+                result.value.modelo = JSON.parse(result.value.modelo);
+                if (reservas && reservas.length > 0) {
                     const data = { ...result.value, id: reservas[0].id + 1 };
                     reservas.push(data);
                 } else {

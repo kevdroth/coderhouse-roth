@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Honda CBR600RR",
+        "imagen": "assets/img/motos/1.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Yamaha YZF-R1",
+        "imagen": "assets/img/motos/2.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Kawasaki Ninja ZX-10R",
+        "imagen": "assets/img/motos/3.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Suzuki GSX-R1000",
+        "imagen": "assets/img/motos/4.jpg"
+    },
+    {
+        "id": 5,
+        "nombre": "Ducati Panigale V4",
+        "imagen": "assets/img/motos/5.jpg"
+    },
+    {
+        "id": 6,
+        "nombre": "BMW S1000RR",
+        "imagen": "assets/img/motos/6.jpg"
+    },
+    {
+        "id": 7,
+        "nombre": "Triumph Daytona 675",
+        "imagen": "assets/img/motos/7.jpg"
+    },
+    {
+        "id": 8,
+        "nombre": "KTM RC 390",
+        "imagen": "assets/img/motos/8.jpg"
+    }
+]

@@ -1,0 +1,5 @@
+[
+    { "id": 1, "type": "auto" },
+    { "id": 2, "type": "moto" },
+    { "id": 3, "type": "camioneta" }
+]
