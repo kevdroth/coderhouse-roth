@@ -1,4 +1,5 @@
 let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+let searchTimeout;
 
 const deleteReserva = (id) => {
     const isValid = reservas.find((f) => f.id === id);
@@ -95,7 +96,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const inputSearch = document.querySelector('#inputSearch');
     const btnSearch = document.querySelector('#btnSearch');
-    const btnClear = document.querySelector('#btnClear');
     const addReserva = document.querySelector('#addReserva');
 
     if (reservas.length > 0) {
@@ -111,8 +111,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    btnSearch.addEventListener('click', () => {
-        if (inputSearch.value) {
+    inputSearch.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(() => {
             const searchQuery = inputSearch.value.toLowerCase();
             const filteredReservas = reservas.filter((reserva) => {
                 return (
@@ -126,14 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 );
             });
             renderReservas(filteredReservas);
-        } else {
-            renderReservas(reservas);
-        }
-    });
-
-    btnClear.addEventListener('click', () => {
-        inputSearch.value = '';
-        renderReservas(reservas);
+        }, 1000);
     });
 
     addReserva.addEventListener('click', () => {
